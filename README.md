@@ -22,7 +22,6 @@ Seguindo a arquitetura da aplicação que deve ser criada, é necessario que se 
 Segue na imagem a seguir o esquema da vpc usada
 <imagem1>
 
-### As NAT Gateways foram apagadas durante a construção do projeto, pensando em reduzir os custos totais, e foram criadas novamente todas as vezes que trabalhava no projeto
 
 ## Security Groups
 
@@ -48,3 +47,20 @@ Nome: RDS-SG
 | TYPE  | PROTOCOL | PORT RANGE | SOURCE |
 | ----- | ---- | --- | ---------- |
 | MYSQL/AURORA  | TCP  | 3306  | instanciasEC2 |
+
+# EFS do sistema
+
+Para armazenar os estáticos do container de aplicação Wordpress usaremos um elastic file system na AWS, que poderá ser acessado por todas as instancias EC2. Sua montagem será feita por meio do script `user_data.sh`, mesmo arquivo usado para instalar/configurar o docker.
+
+Para a criação do EFS utilizei todas as opções default do recurso.
+
+Para garantir que as instancias EC2 tenham acesso ao NFS criaremos um novo security group para atachar ao EFS.
+
+Nome: EFS-SG
+| TYPE  | PROTOCOL | PORT RANGE | SOURCE |
+| ----- | ---- | --- | ---------- |
+| NFS  | TCP  | 2049  | instanciasEC2 |
+
+Usando a seguinte linha do script, fazemos com que o efs fique persistente nas EC2 que serão criadas usando ele:
+
+`echo "fs-0e491dfe79b5218d0.efs.us-east-1.amazonaws.com:/     /efs      nfs4      nfsvers=4.1,rsize=1048576,wsize=1048576,hard,timeo=600,retrans=2,noresvport,_netdev      0      0" >> /etc/fstab`

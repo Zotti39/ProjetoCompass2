@@ -11,4 +11,12 @@ sudo usermod -a -G docker ec2-user
 # Inicia o docker automaticamente
 sudo systemctl enable docker 
 
+# Configurar o EFS
+sudo yum install amazon-efs-utils -y
+sudo mkdir /efs 
+# O seguinte comando é encontrado na aba "attach" na pagina do EFS
+sudo mount -t nfs4 -o nfsvers=4.1,rsize=1048576,wsize=1048576,hard,timeo=600,retrans=2,noresvport fs-0e491dfe79b5218d0.efs.us-east-1.amazonaws.com:/ efs
+# Agora com o objetivo de tornar o efs persistente nas instancias, passaremos o seguinte comando, com objetivo de adicionar a linha dentro de echo para o arquivo fstab, que permitirá a montagem automatica do efs toda vez que rebootar a maquina
+echo "fs-0e491dfe79b5218d0.efs.us-east-1.amazonaws.com:/     /efs      nfs4      nfsvers=4.1,rsize=1048576,wsize=1048576,hard,timeo=600,retrans=2,noresvport,_netdev      0      0" >> /etc/fstab
+
 
