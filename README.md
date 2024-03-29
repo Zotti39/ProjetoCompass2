@@ -33,13 +33,14 @@ Nome: LoadBalancer-SG
 | HTTP  | TCP  | 80  | 0.0.0.0/0  |
 | HTTPS | TCP  | 443  | 0.0.0.0/0  |
 
-Para as instancias ec2, que so devem receber trafego vindo do Load Balancer, configurei as seguintes regras no security group:
+Para as instancias ec2, que devem receber trafego vindo do Load Balancer e de IPs de dentro da mesma VPC, permitindo o acesso via Bastion Host as instancias, configurei as seguintes regras no security group:
 
 Nome: instanciasEC2
 | TYPE  | PROTOCOL | PORT RANGE | SOURCE |
 | ----- | ---- | --- | ---------- |
 | HTTP  | TCP  | 80  | LoadBalancer-SG |
 | HTTPS | TCP  | 443  | LoadBalancer-SG |		
+| SSH | TCP  | 22  | 10.0.0.0/16 |
 
 Para o RDS establecerei um security group que permite o trafego de entrada vindo das instancias ec2 privadas:
 
@@ -64,3 +65,30 @@ Nome: EFS-SG
 Usando a seguinte linha do script, fazemos com que o efs fique persistente nas EC2 que serão criadas usando ele:
 
 `echo "fs-0e491dfe79b5218d0.efs.us-east-1.amazonaws.com:/     /efs      nfs4      nfsvers=4.1,rsize=1048576,wsize=1048576,hard,timeo=600,retrans=2,noresvport,_netdev      0      0" >> /etc/fstab`
+
+Podemos conferir se o EFS foi devidamente montado na instancia quando a acessamos e passamos o comando "df -h" no terminal, devemos encontrar um resultado como o seguinte:
+
+<imagem>
+
+### OBS: Tentei criar o EFS como One Zone para poupar custos mas aparentemente eçe so fica acessivel a instancias que estejam na mesma AZ do file system, assim tive que manter a configuração regional.
+
+# Criação do RDS
+
+Para o RDS usaremos o nome `Projeto02-RDS` a engine MySQL 8.0.35, template Free tier, será uma instancia `db.t3.micro` com 2vCPUs 1GiB RAM e network: 2085Mbps, Terá um storage gp2 com 20GiB
+
+A base de dados tera o nome de `Projeto02_DataBase` e o master username `admin` e password `admin123`
+
+Na aba Connectivity selecionei "Don’t connect to an EC2 compute resource" pois isso será feito posteriormente quando tivermos tudo concluido, e selecionamos a vpc do projeto, em "Public Access" mantive a opção "no" e selecionei o security group criado para esse recurso `RDS-SG`, AZ selecionada `us-east-1a`, Desativei backups automaticos.
+
+# Criação das Instancias Privadas
+
+Dentro de cada subnet privada existente na VPC, foi criada uma instancia possuindo apenas um IP privado, que só podera ser acessada pelo Load Balancer e, durante a fase de testes por uma instancia Bastion Host localizada na subnet publica dentro da mesma VPC.
+
+Para construir a instancia utilizei o `data_user.sh` como script de inicialização, que automatiza a :
+    - Instalação do Docker
+    - Instalação do Docker-compose
+    - Montagem do EFS na instancia
+    - Cria um documento docker-compose.yaml com as configuraçoes do Wordpress
+    - Sobe o container contendo a aplicação Wordpress
+
+Dentro delas tambem foi instalado o python3-pip que faz funcionar o docker-compose
