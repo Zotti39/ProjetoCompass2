@@ -19,7 +19,7 @@ echo "fs-0e491dfe79b5218d0.efs.us-east-1.amazonaws.com:/     /efs      nfs4     
 ### 3. Docker-Compose
 # Download Docker-Compose
 sudo curl -L https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m) -o /usr/local/bin/docker-compose
-# Corrige as permissões após download
+# Corrige as permissões após o download
 sudo chmod +x /usr/local/bin/docker-compose
 
 ### 4. Containers

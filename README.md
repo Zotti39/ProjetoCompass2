@@ -1,9 +1,9 @@
 # ProjetoCompass2
-Repositorio para o segundo projeto do programa de bolsas DevSecOps + AWS da Compass
+Repositorio usado para o segundo projeto do programa de bolsas DevSecOps + AWS da Compass. As especificaçoes da atividade estão no arquivo `Projeto02.pdf` disponivel neste repositorio.
 
 # 1. Instalação do Oracle Linux
 
-### VirtualBox instalation
+### VirtualBox installation
 Para este projeto usarei a Versão 7.0.12 do Oracle VirtualBox para windows que pode ser baixada no site oficial https://www.virtualbox.org/wiki/Downloads
 
 ### Oracle Linux
@@ -19,7 +19,7 @@ Durante a instalação da VM configurei para a mesma usar o idioma ingles e não
 
 Assim está concluida a instalação da virtual machine que usarei em algumas etapas deste projeto
 
-# 2. Criação do ambiente na AWS
+# 2. Criação da VPC
 Seguindo a arquitetura da aplicação que deve ser criada, é necessario que se tenha uma VPC com duas subnets privadas em diferentes AZs com acesso a internet por meio de um NAT Gateway.
 
 Segue na imagem a seguir o esquema da vpc usada
@@ -48,8 +48,6 @@ Nome: EFS-SG
 Podemos conferir se o EFS foi devidamente montado na instancia quando a acessamos e passamos o comando `df -h` no terminal, devemos encontrar um resultado como o seguinte:
 
 <img src="https://github.com/Zotti39/ProjetoCompass2/blob/main/Imagens/df-h(2).png">
-
-### OBS: Tentei criar o EFS como One Zone para poupar custos mas aparentemente eçe so fica acessivel a instancias que estejam na mesma AZ do file system, assim tive que manter a configuração regional.
 
 # 4. Criação do RDS
 ### De acordo com a documentação disponivel em: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_CreateDBInstance.html
@@ -116,7 +114,7 @@ No passo seguinte, optei por criar o arquivo `Docker-compose.yaml` diretamente d
           - "80:80"
         restart: always
         environment:
-          WORDPRESS_DB_HOST: projeto02-rds.cj8e4qgw0xn6.us-east-1.rds.amazonaws.com 
+          WORDPRESS_DB_HOST: projeto02-rds.cj8e4qgw0xn6.us-east-1.rds.amazonaws.com         ### Endpoint do RDS
           WORDPRESS_DB_USER: admin
           WORDPRESS_DB_PASSWORD: admin123
           WORDPRESS_DB_NAME: Projeto02_DataBase
@@ -129,7 +127,16 @@ Na primeira versão, o codigo não possuia a linha `WORDPRESS_TABLE_CONFIG: wp_`
 
 Dentro de cada subnet privada existente na VPC, foi criada uma instancia possuindo apenas um IP privado, que só podera ser acessada pelo Load Balancer e, durante a fase de testes por uma instancia Bastion Host localizada na subnet publica dentro da mesma VPC.
 
-Para construir a instancia utilizei o `data_user.sh` como script de inicialização, que automatiza a :
+As instancias foram criadas com as seguintes configurações:
+
+- Nome: Projeto02-Instance1 / Projeto02-Instance2
+- AMI: Amazon Linux 2023 AMI (64-bit / x86)
+- Instance type: t3.small (2vCPU 2GiB)
+- KeyPair: MinhaChaveSSH
+
+Vale tambem ressaltar que foram usadas tags e resource types especificos do programa de bolsas essenciais para a criação destas instancias.
+
+Para construir a instancia utilizei o `data_user.sh` como script de inicialização, que automatiza a:
 
 -  Instalação do Docker
 -  Instalação do Docker-compose
@@ -150,8 +157,6 @@ Nome: instanciasEC2
 ### De acordo com a documentação disponivel em: https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-getting-started.html
 
 O load balancer tem como objetivo distribuir o trafego de rede entre as duas instancias EC2s com a aplicação Wordpress disponiveis, evitando que uma delas fique sobrecarregada em relação a outra.
-
-Por padrão o Load Balancer distribui o tráfego de forma equitativa entre as Zonas de Disponibilidade, o que significa que se tivessemos 2 instancias privadas na AZ `us-east-1a` e apenas 1 na AZ `us-east-1b` a divisão de carga seria 25% - 25% - 50%. Mas como isso não se enquadra no nosso caso não há a necessidade de preucupar-se com isso.
 
 Para este recurso irei utilizar as seguintes opções em "Create LoadBalancer"
 
@@ -174,9 +179,53 @@ Em health check mantive as opçoes default, apenas troquei o Ping Path para '/wp
 
 Selecionei as duas instancias previamente configuradas e com o container da aplicação funcionando e está concluida a configuração do Load Balancer.
 
-### Testes do load balancer 29/03/2024:
-1. Apos reiniciar as instancias com o script atual, apos alguns segundos fora do ar, elas voltam a funcionar, ou seja, o container com a app wordpress reinicia automaticamente assim que a maquina reiniciar.
+# 8. Auto Scaling Group
 
-2. Com apenas a instancia1 ligada o load balancer continua funcionando corretamente, e ao reiniar a instancia1 e desligar a instancia2, o load balancer tambem continua funcionando.
+Optei por usar um Launch Template para ASG, devido a recomendação da propria Amazon, que descontinuou o serviço de Launch Configurations em 31 de dezembro de 2023.
 
-# 8. 
+`Recomendamos que você use Launch Template para garantir que esteja acessando os recursos e melhorias mais recentes. Nem todos os recursos do Amazon EC2 Auto Scaling estão disponíveis quando você usa Launch Configurations.`
+Fonte: https://docs.aws.amazon.com/pt_br/autoscaling/ec2/userguide/launch-templates.html
+
+## 8.1 Launch Template
+Antes de criar o Auto Scaling group, é necessario ter um template das instancias que serão criadas (mesmas do item 6 desta documentação), e pode ser criado em ` EC2 > Launch templates > Create lauch template `. O Launch template criado para este projeto tem as seguintes configurações:
+
+- Name: Projeto02-EC2template
+- Auto Scaling guidance: Ativo
+- AMI: Amazon Linux 2023 AMI
+- Instance type: t3.small (2vCPU 2GiB)
+- KeyPair: MinhaChaveSSH
+- Subnet: Don't include in launch template
+- Security group: instanciasEC2
+- Storage: Volume1 (8Gib, EBS, gp3)
+- Resource tags: Adicionadas as 2 tags do PB necessarias para criação da EC2
+- Advanced details -> User data : Select `user_data.sh`
+
+## 8.2 Auto Scaling
+
+O ASG nesse projeto tem o objetivo de escalar as EC2s automaticamente para cima ou para baixo, quando há necessidade de mais recursos computacionais, e iniciar novas instâncias substitutas automaticamente quando alguma delas falhar ou for interrompida.
+
+Segue as configurações do ASG:
+
+- Name: Projeto02-ASG
+- Launch template: Projeto02-EC2template
+- VPC: Projeto02-vpc
+- Availability Zones and subnets: SubnetPrivada1 / SubnetPrivada2
+- Load balancing: 
+  - Attach to an existing load balancer -> Choose from Classic Load Balancers -> Projeto02-LoadBalancer
+- VPC Lattice integration options: No VPC Lattice service
+- Health checks: Default
+- Additional settings: Default
+
+Para a parte `Configure group size and scaling` que é onde configuramos as capacidades de criar e derrubar instancias do Auto Scaling, teremos as seguintes definições:
+
+- Desired capacity: 2
+- Min desired capacity: 2 (O Auto Scaling nunca reduzirá o número de instâncias abaixo desse valor_)
+- Max desired capacity: 4 (O Auto Scaling não iniciará mais instâncias do que este número, mesmo que a demanda aumente significativamente)
+- Automatic scaling: 
+  - Target tracking scaling policy
+  - Metric type: Average CPU utilization
+  - Target value: 90 (Valor alto o suficiente para não deixar duas instancias com 40% de utilização por exemplo)
+  - Instance warmup: 300 seconds
+- Instance maintenance policy: Mixed behavior / No policy
+
+O Auto Scaling Group pode ser desativado temporariamente selecionando o mesmo na dashbord dos auto scaling groups, clicando em ` Actions -> Edit ` e mudando, na aba `Group Size`, os tres valores de `Desired capacity` para zero. Quando se deseja "despausar" o ASG basta fazer o mesmo processo e colocar os valores originais.
