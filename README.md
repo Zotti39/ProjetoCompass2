@@ -117,7 +117,7 @@ Separei esta seção para explicar com mais detalhes a escrita do script de inic
 <div id='s1'/> 
 
 ### 5.1 Docker
-A primeira parte, mostra como instalar o plugin docker na instancia e permitir que ele inicie automaticamente quando a mesma é reiniciada. Usei como base a propria documentação da AWS.
+A primeira parte, mostra como instalar o docker na instancia e permitir que ele inicie automaticamente quando a mesma é reiniciada. Usei como base a propria documentação da AWS.
 
     sudo yum update -y
     sudo yum install -y docker
@@ -128,7 +128,7 @@ A primeira parte, mostra como instalar o plugin docker na instancia e permitir q
 <div id='s2'/> 
 
 ### 5.2 EFS
-As seguintes linhas tem como objetivo configurar o ambiente para a conexão com o EFS, montar o sistema de arquivos na máquina e, ao passar a ultima linha para o arquivo `/etc/fstab`, fazer com que o EFS se mantenha persistente mesmo após um possivel reboot da instancia.
+As seguintes linhas tem como objetivo configurar o ambiente para a conexão com o EFS, montar o sistema de arquivos na máquina e, ao passar a ultima linha para o arquivo `/etc/fstab`, fazer com que o EFS se mantenha persistente mesmo após um possível reboot da instancia.
 
     sudo yum install amazon-efs-utils -y
     sudo mkdir /efs 
@@ -168,7 +168,7 @@ No passo seguinte, optei por criar o arquivo `Docker-compose.yaml` diretamente d
 <div id='s5'/> 
 
 ### 5.5 Observações
-Na primeira versão, o codigo não possuia a linha `WORDPRESS_TABLE_CONFIG: wp_` e o script não estava funcionando corretamente, essa linha específica tem como objetivo definir o prefixo das tabelas usadas pela aplicação Wordpress.
+Na primeira versão, o código não possuia a linha `WORDPRESS_TABLE_CONFIG: wp_` e o script não estava funcionando corretamente, essa linha específica tem como objetivo definir o prefixo das tabelas usadas pela aplicação Wordpress.
 
 <div id='EC2'/> 
 
