@@ -1,0 +1,710 @@
+### TemplateCloudFormation.yaml
+### 
+### Esse é o template usado para replicar toda a estrutura do projeto utilizando o cloud formation, facilitando a portabilidade do sistema
+###
+AWSTemplateFormatVersion: 2010-09-09
+Metadata:
+  'AWS::CloudFormation::Designer':
+    5810e254-10de-4773-a5fa-0fe9a09d9c3f:
+      size:
+        width: 580
+        height: 380
+      position:
+        x: -70
+        'y': 80
+      z: 0
+      embeds:
+        - d958f6d7-c6e6-4f7e-9f7e-43bc7017b76e
+        - 86bcca21-9781-4335-b983-8a97dd2d2ccf
+        - cf447d41-13d7-4911-9b8e-b9ce7eda7fd8
+        - a0c63946-2249-4f10-88e3-eaeda32b1a1d
+        - c94d7cb5-73d1-4ae1-bba8-604e6222207c
+        - da3c2505-7acd-4be3-9cd2-63865d1f4149
+        - 8ae80c6c-c799-4048-b42c-0174098e9c53
+    8ae80c6c-c799-4048-b42c-0174098e9c53:
+      size:
+        width: 140
+        height: 110
+      position:
+        x: 220
+        'y': 90
+      z: 1
+      parent: 5810e254-10de-4773-a5fa-0fe9a09d9c3f
+      embeds:
+        - c3872256-8e9e-4292-9caa-a6e5b463b4c5
+    da3c2505-7acd-4be3-9cd2-63865d1f4149:
+      size:
+        width: 130
+        height: 110
+      position:
+        x: 370
+        'y': 90
+      z: 1
+      parent: 5810e254-10de-4773-a5fa-0fe9a09d9c3f
+      embeds:
+        - 6097615d-c867-4b48-9fb6-972c549aaba3
+    f4f167a7-8810-45f6-851f-6f2bdcd5461c:
+      size:
+        width: 60
+        height: 60
+      position:
+        x: 190
+        'y': 530
+      z: 0
+      embeds: []
+    c94d7cb5-73d1-4ae1-bba8-604e6222207c:
+      size:
+        width: 100
+        height: 100
+      position:
+        x: 180
+        'y': 340
+      z: 1
+      parent: 5810e254-10de-4773-a5fa-0fe9a09d9c3f
+      embeds:
+        - bb4bb12c-14f9-433b-81b0-304a8517a9eb
+    bb4bb12c-14f9-433b-81b0-304a8517a9eb:
+      size:
+        width: 60
+        height: 60
+      position:
+        x: 200
+        'y': 370
+      z: 2
+      parent: c94d7cb5-73d1-4ae1-bba8-604e6222207c
+      embeds: []
+    cf566d28-3c9e-4312-8f46-94f0f9324136:
+      source:
+        id: f4f167a7-8810-45f6-851f-6f2bdcd5461c
+      target:
+        id: 5810e254-10de-4773-a5fa-0fe9a09d9c3f
+      z: 0
+    c3872256-8e9e-4292-9caa-a6e5b463b4c5:
+      size:
+        width: 60
+        height: 60
+      position:
+        x: 230
+        'y': 110
+      z: 2
+      parent: 8ae80c6c-c799-4048-b42c-0174098e9c53
+      embeds: []
+    6097615d-c867-4b48-9fb6-972c549aaba3:
+      size:
+        width: 60
+        height: 60
+      position:
+        x: 380
+        'y': 110
+      z: 2
+      parent: da3c2505-7acd-4be3-9cd2-63865d1f4149
+      embeds: []
+    a0c63946-2249-4f10-88e3-eaeda32b1a1d:
+      size:
+        width: 110
+        height: 90
+      position:
+        x: -50
+        'y': 110
+      z: 1
+      parent: 5810e254-10de-4773-a5fa-0fe9a09d9c3f
+      embeds: []
+    cf447d41-13d7-4911-9b8e-b9ce7eda7fd8:
+      size:
+        width: 110
+        height: 100
+      position:
+        x: -50
+        'y': 210
+      z: 1
+      parent: 5810e254-10de-4773-a5fa-0fe9a09d9c3f
+      embeds: []
+    86bcca21-9781-4335-b983-8a97dd2d2ccf:
+      size:
+        width: 110
+        height: 100
+      position:
+        x: -60
+        'y': 340
+      z: 1
+      parent: 5810e254-10de-4773-a5fa-0fe9a09d9c3f
+      embeds:
+        - 44f4f231-0983-4616-afb4-61f977509754
+    d958f6d7-c6e6-4f7e-9f7e-43bc7017b76e:
+      size:
+        width: 110
+        height: 100
+      position:
+        x: 60
+        'y': 340
+      z: 1
+      parent: 5810e254-10de-4773-a5fa-0fe9a09d9c3f
+      embeds:
+        - 115cd9a0-ac9d-4b02-980c-adf075a8f488
+    44f4f231-0983-4616-afb4-61f977509754:
+      size:
+        width: 60
+        height: 60
+      position:
+        x: -30
+        'y': 370
+      z: 2
+      parent: 86bcca21-9781-4335-b983-8a97dd2d2ccf
+      embeds: []
+    115cd9a0-ac9d-4b02-980c-adf075a8f488:
+      size:
+        width: 60
+        height: 60
+      position:
+        x: 80
+        'y': 370
+      z: 2
+      parent: d958f6d7-c6e6-4f7e-9f7e-43bc7017b76e
+      embeds: []
+    a181041e-5ced-4892-9919-911ee55544b6:
+      size:
+        width: 60
+        height: 60
+      position:
+        x: 380
+        'y': -50
+      z: 0
+      embeds: []
+    0e6b6255-d2d9-422b-a425-5f69d429baf5:
+      size:
+        width: 60
+        height: 60
+      position:
+        x: 240
+        'y': -50
+      z: 0
+      embeds: []
+    e23a216b-78f5-4c99-88bf-e85c6512cb51:
+      source:
+        id: 0e6b6255-d2d9-422b-a425-5f69d429baf5
+      target:
+        id: c3872256-8e9e-4292-9caa-a6e5b463b4c5
+      z: 3
+    03e4b433-9af5-4c76-8357-e5e499b25fb4:
+      source:
+        id: c3872256-8e9e-4292-9caa-a6e5b463b4c5
+      target:
+        id: 0e6b6255-d2d9-422b-a425-5f69d429baf5
+      z: 4
+### Aqui começa a especificação de todos os recursos criados no projeto, com suas propriedades e definiçoes, os metadados são para o CF Designer
+Resources:
+##### 1.1 VPC and Subnets
+  MinhaVPC:
+    Type: 'AWS::EC2::VPC'
+    Properties:
+      CidrBlock: 172.31.0.0/16
+      Tags:
+        - Key: Name
+          Value: MinhaVPC
+      ### A seguintes properties foram adicionadas para funcionar com o LoadBalancer
+      EnableDnsSupport: true
+      EnableDnsHostnames: true
+    Metadata:
+      'AWS::CloudFormation::Designer':
+        id: 5810e254-10de-4773-a5fa-0fe9a09d9c3f
+  MinhaSubnetPublica1:
+    Type: 'AWS::EC2::Subnet'
+    DependsOn:
+      - MinhaVPC
+    Properties:
+      MapPublicIpOnLaunch: true
+      VpcId: !Ref MinhaVPC
+      CidrBlock: 172.31.0.0/20
+      AvailabilityZone: us-east-1a
+      Tags:
+        - Key: Name
+          Value: MinhaSubnetPublica1
+    Metadata:
+      'AWS::CloudFormation::Designer':
+        id: 8ae80c6c-c799-4048-b42c-0174098e9c53
+  MinhaSubnetPublica2:
+    Type: 'AWS::EC2::Subnet'
+    DependsOn:
+      - MinhaVPC
+    Properties:
+      MapPublicIpOnLaunch: true
+      VpcId: !Ref MinhaVPC
+      CidrBlock: 172.31.16.0/20
+      AvailabilityZone: us-east-1b
+      Tags:
+        - Key: Name
+          Value: MinhaSubnetPublica2
+    Metadata:
+      'AWS::CloudFormation::Designer':
+        id: da3c2505-7acd-4be3-9cd2-63865d1f4149
+  MinhaSubnetPrivada1:
+    Type: 'AWS::EC2::Subnet'
+    DependsOn:
+      - MinhaVPC
+    Properties:
+      VpcId: !Ref MinhaVPC
+      CidrBlock: 172.31.128.0/20
+      AvailabilityZone: us-east-1a
+      Tags:
+        - Key: Name
+          Value: MinhaSubnetPrivada1
+    Metadata:
+      'AWS::CloudFormation::Designer':
+        id: a0c63946-2249-4f10-88e3-eaeda32b1a1d
+  MinhaSubnetPrivada2:
+    Type: 'AWS::EC2::Subnet'
+    DependsOn:
+      - MinhaVPC
+    Properties:
+      VpcId: !Ref MinhaVPC
+      CidrBlock: 172.31.144.0/20
+      AvailabilityZone: us-east-1b
+      Tags:
+        - Key: Name
+          Value: MinhaSubnetPrivada2
+    Metadata:
+      'AWS::CloudFormation::Designer':
+        id: cf447d41-13d7-4911-9b8e-b9ce7eda7fd8
+###### 1.2 Internet Gateway e Attachment do mesmo na VPC
+  IG:
+    Type: 'AWS::EC2::InternetGateway'
+    Properties: 
+      Tags:
+        - Key: Name
+          Value: InternetGateway
+    Metadata:
+      'AWS::CloudFormation::Designer':
+        id: f4f167a7-8810-45f6-851f-6f2bdcd5461c
+  atachamento:
+    Type: 'AWS::EC2::VPCGatewayAttachment'
+    Properties:
+      InternetGatewayId: !Ref IG
+      VpcId: !Ref MinhaVPC
+    Metadata:
+      'AWS::CloudFormation::Designer':
+        id: cf566d28-3c9e-4312-8f46-94f0f9324136
+###### 1.3 NATs
+###### https://docs.aws.amazon.com/pt_br/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-natgateway.html
+### NAT 1 e suas dependencias
+  NAT1:
+    Type: 'AWS::EC2::NatGateway'
+    DependsOn:
+      - MinhaSubnetPublica1
+      - MinhaSubnetPrivada1
+    Properties: 
+      ### AllocationId precisa ser o ID no ElasticIP, por isso puxamos o seu atributo usando a Fn::GetAtt
+      AllocationId: !GetAtt ElasticIP1.AllocationId  
+      SubnetId: !Ref MinhaSubnetPublica1
+      Tags:
+        - Key: Name
+          Value: MinhaNAT1
+    Metadata:
+      'AWS::CloudFormation::Designer':
+        id: c3872256-8e9e-4292-9caa-a6e5b463b4c5
+  RoutePrivada1:
+    DependsOn: 
+      - NAT1
+      - RoutingTablePrivada1
+    Type: 'AWS::EC2::Route'
+    Properties:
+      RouteTableId: !Ref RoutingTablePrivada1
+      DestinationCidrBlock: 0.0.0.0/0
+      NatGatewayId: !Ref NAT1
+    Metadata:
+      'AWS::CloudFormation::Designer':
+        id: 44f4f231-0983-4616-afb4-61f977509754
+  ElasticIP1:
+    Type: 'AWS::EC2::EIP'
+    Properties:
+      Domain: vpc
+    Metadata:
+      'AWS::CloudFormation::Designer':
+        id: 0e6b6255-d2d9-422b-a425-5f69d429baf5
+  RoutingTablePrivada1:
+    Type: 'AWS::EC2::RouteTable'
+    Properties: 
+      VpcId: !Ref MinhaVPC
+    Metadata:
+      'AWS::CloudFormation::Designer':
+        id: 86bcca21-9781-4335-b983-8a97dd2d2ccf
+  Private1TableAssociation:
+    ### SubnetRouteTableAssociation é o "link" que vemos no CFDesigner
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    DependsOn: 
+      - RoutePrivada1
+    Properties:
+      SubnetId: !Ref MinhaSubnetPrivada1
+      RouteTableId: !Ref RoutingTablePrivada1
+### NAT 2 e suas dependencias
+  NAT2:
+    Type: 'AWS::EC2::NatGateway'
+    DependsOn:
+      - MinhaSubnetPublica2
+      - MinhaSubnetPrivada2
+    Properties: 
+      AllocationId: !GetAtt ElasticIP2.AllocationId
+      SubnetId: !Ref MinhaSubnetPublica2
+      Tags:
+        - Key: Name
+          Value: MinhaNAT2
+    Metadata:
+      'AWS::CloudFormation::Designer':
+        id: 6097615d-c867-4b48-9fb6-972c549aaba3
+  ElasticIP2:
+    Type: 'AWS::EC2::EIP'
+    Properties: 
+      Domain: vpc
+    Metadata:
+      'AWS::CloudFormation::Designer':
+        id: a181041e-5ced-4892-9919-911ee55544b6
+  RoutePrivada2:
+    DependsOn: 
+      - NAT2
+      - RoutingTablePrivada2
+    Type: 'AWS::EC2::Route'
+    Properties: 
+      RouteTableId: !Ref RoutingTablePrivada2
+      DestinationCidrBlock: 0.0.0.0/0
+      NatGatewayId: !Ref NAT2
+    Metadata:
+      'AWS::CloudFormation::Designer':
+        id: 115cd9a0-ac9d-4b02-980c-adf075a8f488
+  RoutingTablePrivada2:
+    Type: 'AWS::EC2::RouteTable'
+    Properties: 
+      VpcId: !Ref MinhaVPC
+    Metadata:
+      'AWS::CloudFormation::Designer':
+        id: d958f6d7-c6e6-4f7e-9f7e-43bc7017b76e
+  Private2TableAssociation:
+    ### SubnetRouteTableAssociation é o "link" que vemos no CFDesigner
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    DependsOn:
+      - RoutePrivada2
+    Properties:
+      SubnetId: !Ref MinhaSubnetPrivada2
+      RouteTableId: !Ref RoutingTablePrivada2
+
+#### 1.4 Tabelas de roteamento Publica e suas associaçoes
+  RoutingTablePublica:
+    Type: 'AWS::EC2::RouteTable'
+    Properties:
+      VpcId: !Ref MinhaVPC
+    Metadata:
+      'AWS::CloudFormation::Designer':
+        id: c94d7cb5-73d1-4ae1-bba8-604e6222207c
+  RoutePublic:
+    Type: 'AWS::EC2::Route'
+    DependsOn:
+      - RoutingTablePublica
+      - IG
+    Properties:
+      RouteTableId: !Ref RoutingTablePublica
+      DestinationCidrBlock: 0.0.0.0/0
+      GatewayId: !Ref IG
+    Metadata:
+      'AWS::CloudFormation::Designer':
+        id: bb4bb12c-14f9-433b-81b0-304a8517a9eb
+  PublicSubnet1RouteTableAssociation:
+    ### SubnetRouteTableAssociation é o "link" que vemos no CFDesigner
+    Type: 'AWS::EC2::SubnetRouteTableAssociation'
+    DependsOn:
+      - RoutePublic
+    Properties:
+      RouteTableId: !Ref RoutingTablePublica
+      SubnetId: !Ref MinhaSubnetPublica1
+  PublicSubnet2RouteTableAssociation:
+    ### SubnetRouteTableAssociation é o "link" que vemos no CFDesigner
+    Type: 'AWS::EC2::SubnetRouteTableAssociation'
+    DependsOn:
+      - RoutePublic
+    Properties:
+      RouteTableId: !Ref RoutingTablePublica
+      SubnetId: !Ref MinhaSubnetPublica2
+### 1.5 Security groups criados de acordo com os do projeto original, mesmas rules.
+### As Outbound rules "all trafic / 0.0.0.0/16"  são adicionadas por default quando não houver a `Property` `SecurityGroupEgress` definidas
+### Detalhes sobre as propriedades: https://docs.aws.amazon.com/pt_br/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-securitygroup-ingress.html
+  SGLB:
+    Type: AWS::EC2::SecurityGroup
+    DependsOn:
+      - MinhaVPC
+    Properties:
+      Tags: 
+        - Key: Name
+          Value: SG-LB
+      GroupName: SG-LB
+      GroupDescription: Permite que o Load Balancer receba solicitacoes dos clientes externos
+      VpcId: !Ref MinhaVPC
+      SecurityGroupIngress:  ### Inbound rules
+        - IpProtocol: tcp
+          FromPort: 80
+          ToPort: 80
+          CidrIp: 0.0.0.0/0
+  SGEC2:
+    Type: AWS::EC2::SecurityGroup
+    DependsOn:
+      - MinhaVPC
+    Properties:
+      Tags: 
+        - Key: Name
+          Value: SG-EC2
+      GroupName: SG-EC2
+      GroupDescription: Permite o trafego para as instancias privadas vindo do load balancer
+      VpcId: !Ref MinhaVPC
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: 80
+          ToPort: 80
+          SourceSecurityGroupId: !Ref SGLB
+        - IpProtocol: tcp
+          FromPort: 22
+          ToPort: 22
+          CidrIp: 172.31.0.0/16     # Cidr Block da VPC
+      SecurityGroupEgress:          # No template sem SecurityGroupEgress ele mantem o default, que é all trafic liberado para 0.0.0.0/16
+        - IpProtocol: '-1'          # Protocolo '-1' representa todos os protocolos (all traffic)
+          CidrIp: 0.0.0.0/0         # Permitindo acesso de qualquer lugar (0.0.0.0/16)
+  SGRDS:
+    Type: AWS::EC2::SecurityGroup
+    DependsOn:
+      - MinhaVPC
+    Properties:
+      Tags: 
+        - Key: Name
+          Value: SG-RDS
+      GroupName: SG-RDS
+      GroupDescription: Permite o trafego de entrada das instancias ec2 privadas para o RDS
+      VpcId: !Ref MinhaVPC
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: 3306
+          ToPort: 3306
+          SourceSecurityGroupId: !Ref SGEC2
+  SGEFS:
+    Type: AWS::EC2::SecurityGroup
+    DependsOn:
+      - MinhaVPC
+    Properties:
+      Tags: 
+        - Key: Name
+          Value: SG-EFS
+      GroupName: SG-EFS
+      GroupDescription: Permite o acesso das instancias ec2 ao EFS
+      VpcId: !Ref MinhaVPC
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: 2049
+          ToPort: 2049
+          SourceSecurityGroupId: !Ref SGEC2
+#### 2. RDS
+### https://docs.aws.amazon.com/pt_br/AWSCloudFormation/latest/UserGuide/aws-resource-rds-dbsubnetgroup.html
+  GrupoDeSubnets:
+    Type: AWS::RDS::DBSubnetGroup
+    DependsOn:
+      - SGRDS
+      - MinhaSubnetPublica2
+      - MinhaSubnetPublica1
+      - MinhaSubnetPrivada1
+      - MinhaSubnetPrivada2
+    Properties:
+      DBSubnetGroupDescription: The DB subnet group defines which subnets and IP ranges the DB instance can use in the VPC that you selected.
+      SubnetIds:
+        - !Ref MinhaSubnetPrivada1
+        - !Ref MinhaSubnetPublica1
+        - !Ref MinhaSubnetPrivada2
+        - !Ref MinhaSubnetPublica2
+### https://docs.aws.amazon.com/pt_br/AWSCloudFormation/latest/UserGuide/aws-resource-rds-dbinstance.html#cfn-rds-dbinstance-dbsubnetgroupname
+  MeuRDS:
+    Type: 'AWS::RDS::DBInstance'
+    DependsOn:
+      - GrupoDeSubnets
+    Properties:
+      Tags: 
+        - Key: Name
+          Value: Meu-RDS
+      ### Nome da instancia db que será criada
+      DBInstanceIdentifier: meu-rds
+      ### The name of the database to create when the DB instance is created. If this parameter is not specified, no database is created in the DB instance. Equivalente ao "Initial database name"
+      DBName: minhadatabase
+      DBInstanceClass: db.t3.micro
+      StorageType: gp2
+      AllocatedStorage: '20'
+      Engine: MySQL
+      EngineVersion: "8.0.35"
+      MasterUsername: admin
+      MasterUserPassword: admin123
+      ### Seleciona o grupo de subnets que a DBInstance pode usar na VPC
+      DBSubnetGroupName: !Ref GrupoDeSubnets
+      VPCSecurityGroups: 
+        - !Ref SGRDS
+      Port: '3306'
+### 3. EFS
+### https://docs.aws.amazon.com/pt_br/AWSCloudFormation/latest/UserGuide/aws-resource-efs-filesystem.html
+########### When you pass the logical ID of this resource to the intrinsic !Ref function, !Ref returns the FileSystem ID
+  MeuEFS:
+    Type: AWS::EFS::FileSystem
+    DependsOn:
+      - SGEFS
+      - MinhaSubnetPublica2
+      - MinhaSubnetPublica1
+      - MinhaSubnetPrivada1
+      - MinhaSubnetPrivada2
+    Properties:
+      BackupPolicy:
+        Status: ENABLED
+      Encrypted: true
+      PerformanceMode: generalPurpose   ### DEFAULT
+      ThroughputMode: elastic
+      FileSystemTags:
+        - Key: Name
+          Value: Meu-EFS
+  ### Este recurso acima criou o file system que será usado    
+  ### Analisando o projeto original, onde a EFS foi criada com a ajuda da console e de maneira mais padronizada pela AWS, percebi que os unico mountingPoints disponiveis estavam nas subnets publicas da VPC Projeto-02, e as subnets privadas tinham acesso ao EFS normalmente, então aqui criei apenas dois MTs tambem, um para cada subnet publica
+  MountTarget1: 
+    Type: AWS::EFS::MountTarget
+    DependsOn:     ### Mount targets serão criados após o EFS estar funcionando corretamente
+      - MeuEFS
+    Properties: 
+      FileSystemId: !Ref MeuEFS
+      SubnetId: !Ref MinhaSubnetPublica1
+      SecurityGroups: 
+        - !Ref SGEFS
+  MountTarget2: 
+    Type: AWS::EFS::MountTarget
+    DependsOn:
+      - MeuEFS
+    Properties: 
+      FileSystemId: !Ref MeuEFS
+      SubnetId: !Ref MinhaSubnetPublica2
+      SecurityGroups: 
+        - !Ref SGEFS
+### 4. Load Balancer
+### Documentação para o ClassicLB: https://docs.aws.amazon.com/pt_br/AWSCloudFormation/latest/UserGuide/aws-resource-elasticloadbalancing-loadbalancer.html
+  MeuLoadBalancer:
+    Type: AWS::ElasticLoadBalancing::LoadBalancer
+    DependsOn:
+      - IG
+      - SGLB
+    Properties:
+      LoadBalancerName: MeuLoadBalancer
+      Scheme: internet-facing
+      CrossZone: true
+      SecurityGroups: 
+        - !Ref SGLB
+      Subnets:            ### Substitui o `AvailabilityZones` em non-default VPCs
+        - !Ref MinhaSubnetPublica1
+        - !Ref MinhaSubnetPublica2
+      Listeners:
+        - LoadBalancerPort: '80'
+          InstancePort: '80'
+          Protocol: HTTP
+      HealthCheck:        ### Especificar junto o ping path para a app WP
+        Target: 'HTTP:80/wp-admin/install.php'
+        HealthyThreshold: '5'
+        UnhealthyThreshold: '5'
+        Interval: '5'
+        Timeout: '4'
+### 5.1 Launch Template
+### https://docs.aws.amazon.com/pt_br/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-launchtemplate.html
+### Especificações para o LaunchTemplateData: https://docs.aws.amazon.com/pt_br/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-launchtemplate-launchtemplatedata.html  
+  MeuLaunchTemplate:
+    Type: AWS::EC2::LaunchTemplate
+    DependsOn:
+      - MeuRDS
+      - MeuEFS
+      - MeuLoadBalancer
+    Properties:
+      LaunchTemplateName: MeuLaunchTemplate
+      VersionDescription: EC2s c/ objetivo de hospedar um container com app Wordpress
+      LaunchTemplateData:
+        ImageId: ami-0c101f26f147fa7fd
+        InstanceType: t3.small
+        KeyName: MinhaChaveSSH
+        SecurityGroupIds:
+          - !Ref SGEC2
+        TagSpecifications:
+          - ResourceType: "instance"
+            Tags:
+            - Key: CostCenter
+              Value: C092000024
+            - Key: Project
+              Value: PB UNICESUMAR
+            - Key: Name
+              Value: MinhaEC2
+          - ResourceType: "volume"
+            Tags:
+            - Key: CostCenter
+              Value: C092000024
+            - Key: Project
+              Value: PB UNICESUMAR
+            - Key: Name
+              Value: MinhaEC2
+        UserData: !Base64 
+          'Fn::Sub':
+            - >
+              #!/bin/bash 
+
+              sudo yum update -y
+
+              sudo yum install -y docker
+
+              sudo service docker start
+
+              sudo usermod -a -G docker ec2-user
+
+              sudo systemctl enable docker 
+
+              sudo yum install amazon-efs-utils -y
+
+              sudo mkdir /efs 
+
+              sudo mount -t efs -o tls ${Var1}:/ efs
+
+              echo "${Var1}.efs.us-east-1.amazonaws.com:/     /efs      nfs4      nfsvers=4.1,rsize=1048576,wsize=1048576,hard,timeo=600,retrans=2,noresvport,_netdev      0      0" >> /etc/fstab
+              
+              sudo curl -L https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m) -o /usr/local/bin/docker-compose
+              
+              sudo chmod +x /usr/local/bin/docker-compose
+              
+              echo "version: '3.8'    
+
+              services: 
+                wordpress:
+                  image: wordpress
+                  volumes:
+                    - /efs/website:/var/www/html
+                  ports:
+                    - "80:80"
+                  restart: always
+                  environment:
+                    WORDPRESS_DB_HOST: ${Var2}
+                    WORDPRESS_DB_USER: admin
+                    WORDPRESS_DB_PASSWORD: admin123
+                    WORDPRESS_DB_NAME: minhadatabase
+                    WORDPRESS_TABLE_CONFIG: wp_" | sudo tee /home/ec2-user/docker-compose.yaml
+
+              sudo docker-compose -f /home/ec2-user/docker-compose.yaml up -d
+            - Var1: !Ref MeuEFS
+              Var2: !GetAtt MeuRDS.Endpoint.Address
+### 5.2 Auto Scaling Group
+### https://docs.aws.amazon.com/pt_br/AWSCloudFormation/latest/UserGuide/aws-resource-autoscaling-autoscalinggroup.html
+  MeuAutoScaling:
+    Type: AWS::AutoScaling::AutoScalingGroup
+    DependsOn:
+      - MeuLaunchTemplate
+      - atachamento
+    Properties:
+      AutoScalingGroupName: MeuAutoScaling
+      DesiredCapacity: '2'      
+      MaxSize: '4'             
+      MinSize: '2'              
+      AvailabilityZones:
+        - us-east-1a
+        - us-east-1b
+      LaunchTemplate:
+        LaunchTemplateId: !Ref MeuLaunchTemplate
+        Version: !GetAtt MeuLaunchTemplate.LatestVersionNumber
+      LoadBalancerNames:
+        - MeuLoadBalancer
+      VPCZoneIdentifier:   
+        - !Ref MinhaSubnetPrivada1
+        - !Ref MinhaSubnetPrivada2
